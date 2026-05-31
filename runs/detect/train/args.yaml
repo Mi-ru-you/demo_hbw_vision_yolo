@@ -1,7 +1,7 @@
 task: detect
 mode: train
 model: yolo11n.pt
-data: C:/Users/lenovo/Desktop/opencv/third/model_train/dataset/data.yaml
+data: ./dataset/data.yaml
 epochs: 200
 time: null
 patience: 100

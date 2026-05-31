@@ -1,12 +1,35 @@
 from ultralytics import YOLO
 model = YOLO("yolo11n.pt")
-results = model.train(data="C:/Users/lenovo/Desktop/opencv/sixth/model_train/dataset/data.yaml",epochs=200,imgsz=640,
-    cls=1.5,           # 提高分类损失权重
-    mosaic=0.5,        # 降低Mosaic增强
-    copy_paste=0.3,    # 开启复制粘贴增强
-    lr0=0.005,         # 降低学习率
-    seed=42,           # 固定种子
+results=model.train(
+    data="C:/Users/lenovo/Desktop/opencv/seventh/model_train/dataset/data.yaml",
+    epochs=200,
+    imgsz=640,
+    batch=8,
+    patience=20,
+    seed=42,
+    resume=False,
+    lr0=0.0005,
+    lrf=0.05,
+    cos_lr=True,
+    optimizer="AdamW",
+    warmup_epochs=1,
+    weight_decay=0.001,
+    cls=1.2,
+    dfl=1.2,
+    mosaic=0.0,
+    copy_paste=0.0,
+    mixup=0.0,
+    fliplr=0.5,
+    hsv_h=0.01,
+    hsv_s=0.4,
+    hsv_v=0.3,
+    dropout=0.2,
+    label_smoothing=0.15,
+    augment=True,
+    conf=0.25,
+    iou=0.5,
+    max_det=300,
+    val=True,
+    save=True
 )
-
-# 验证（用更严格的阈值评估）
-results = model.val(conf=0.6, iou=0.5)
+results = model.val()
